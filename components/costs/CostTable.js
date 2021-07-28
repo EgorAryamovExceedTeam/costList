@@ -1,108 +1,51 @@
-import { useContext, useState } from "react";
-import moment from "moment";
-import { TextField } from "@material-ui/core";
+import { useContext } from "react";
+import Link from "next/link";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import { HomeContext } from "../../context/HomeContext";
+import styles from "../../styles/CostTable.module.css";
 
 const CostTable = () => {
-  const { notes, setNotes, sum, setSum } = useContext(HomeContext);
-  const [scoreChangeIndex, setScoreChangeIndex] = useState(-1);
-  const [dateChangeIndex, setDateChangeIndex] = useState(-1);
-  const [costChangeIndex, setCostChangeIndex] = useState(-1);
-  const [scoreName, setScoreName] = useState();
-  const [currentDate, setCurrentDate] = useState();
-  const [cost, setCost] = useState();
-
-  const saveScoreName = (currentName, index) => {
-    const notesArr = [...notes];
-    notesArr[index].score = currentName;
-    setNotes([...notesArr]);
-    localStorage.setItem("notes", JSON.stringify(notesArr));
-    setChangeScore(false);
-    // setScoreName("");
-  };
-
-  const saveDate = (date, index) => {
-    const notesArr = [...notes];
-    notesArr[index].date = moment(date).format("DD.MM.YYYY");
-    setNotes([...notesArr]);
-    localStorage.setItem("notes", JSON.stringify(notesArr));
-    setChangeDate(false);
-  };
-
-  const saveCost = (currentCost, index) => {
-    const notesArr = [...notes];
-    let currentSum = sum;
-    currentSum -= notesArr[index].cost;
-    notesArr[index].cost = +currentCost;
-    setSum(curreSum + +currentCost);
-    setNotes([...notesArr]);
-    localStorage.setItem("notes", JSON.stringify(notesArr));
-    setChangeCost(false);
-  };
-
-  const handleChangeScore = (scoreName, status) => {
-    setChangeScore(status);
-    // setScoreName(scoreName);
-  };
-
+  const { notes } = useContext(HomeContext);
+  if (!notes) {
+    return <div>Loading...</div>;
+  }
   return (
-    <>
-      <ul className="notes-list">
-        {notes.map((item, index) => {
-          return (
-            <li key={`note-${index}`}>
-              {`${index + 1})`}
-              {scoreChangeIndex === index ? (
-                <TextField
-                  variant="outlined"
-                  autoFocus
-                  value={scoreName}
-                  onChange={(e) => setScoreName(e.target.value)}
-                  onBlur={(e) => saveScoreName(e.target.value, index)}
-                />
-              ) : (
-                <p
-                  className="score"
-                  onDoubleClick={() => handleChangeScore(item.score, index)}
+    <div className={styles.container}>
+      <TableContainer component={Paper}>
+        <Table className={styles.table_container}>
+          <TableHead>
+            <TableRow className={styles.table_head_row}>
+              <TableCell align="center">Позиция</TableCell>
+              <TableCell align="center">Магазин</TableCell>
+              <TableCell align="center">Дата покупки </TableCell>
+              <TableCell align="center">Сумма покупки p.</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {notes.map((item, index) => (
+              <Link href={`/note/${item.id}`} key={`note-${item.id}`}>
+                <TableRow
+                  key={`note-${item.id}`}
+                  className={styles.table_body_row}
+                  data-testid={`note-${index}`}
                 >
-                  {`Магазин ${item.score}`}
-                </p>
-              )}
-              {dateChangeIndex === index ? (
-                <TextField
-                  variant="outlined"
-                  value={currentDate}
-                  onChange={(date) => setCurrentDate(date, index)}
-                  onBlur={(date) => saveDate(date)}
-                />
-              ) : (
-                <p
-                  className="date"
-                  onDoubleClick={() => handleChangeDate(item.date, index)}
-                >
-                  {moment(new Date()).format("DD.MM.YYYY")}
-                </p>
-              )}
-              {costChangeIndex === index ? (
-                <TextField
-                  variant="outlined"
-                  value={cost}
-                  onChange={(e) => setCost(e.target.value)}
-                  onBlur={(e) => saveCost(e.target.value)}
-                />
-              ) : (
-                <p
-                  className="cost"
-                  onDoubleClick={() => handleChangeCost(item.cost, index)}
-                >
-                  {`${item.cost} p`}
-                </p>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </>
+                  <TableCell align="center">{++index}</TableCell>
+                  <TableCell align="center">{item.score}</TableCell>
+                  <TableCell align="center">{item.date}</TableCell>
+                  <TableCell align="center">{item.cost}</TableCell>
+                </TableRow>
+              </Link>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

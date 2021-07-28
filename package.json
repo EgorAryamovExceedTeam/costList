@@ -3,20 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "cypress:open": "cypress open",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "concurrently \"npm run dev\"  \" npm run cypress:open\""
   },
   "dependencies": {
+    "@apollo/client": "^3.3.21",
+    "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.12.1",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "^3.3.10",
+    "@material-ui/system": "^4.12.1",
+    "apollo-boost": "^0.4.9",
+    "concurrently": "^6.2.0",
+    "cross-fetch": "^3.1.4",
+    "date-fns": "2.22.1",
+    "graphql": "^15.5.1",
     "moment": "^2.29.1",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "cypress": "^8.0.0",
     "eslint": "7.30.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "eslint-plugin-cypress": "^2.11.3"
   }
 }

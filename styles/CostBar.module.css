@@ -1,0 +1,52 @@
+.container {
+  margin-top: calc(30px + 3vh);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 200px;
+  padding-right: 200px;
+  row-gap: 15px;
+  margin-bottom: 20px;
+}
+
+.input_divs {
+  width: 30%;
+  max-width: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.textfields_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 20px;
+}
+
+.input {
+  width: 100%;
+  max-width: 230px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.sum {
+  text-align: end;
+  font-size: 1.5rem;
+}
+
+.add_button {
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.error_message {
+  color: red;
+  font-size: 14px;
+  position: absolute;
+  bottom: -17px;
+  left: 5px;
+}

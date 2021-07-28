@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  padding: 0 200px;
+  display: flex;
+  justify-content: center;
+}
+.table_container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.table_head_row {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.table_body_row {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.table_body_row:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
