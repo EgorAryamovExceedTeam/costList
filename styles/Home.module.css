@@ -9,11 +9,23 @@
 }
 
 .main {
-  padding: 5rem 0;
+  width: 100%;
+  height: 100%;
+  padding: 80px 30px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.table_and_bar_container {
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -118,4 +130,13 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  size: 60%;
 }

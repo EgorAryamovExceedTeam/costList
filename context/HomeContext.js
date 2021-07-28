@@ -1,20 +1,20 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
+import { gql, useQuery } from "@apollo/client";
+import client from "../api/api";
 
 export const HomeContext = createContext();
 
 export const HomeProvider = ({ children }) => {
-  const [notes, setNotes] = useState([]);
-  const [sum, setSum] = useState(0);
-
-  useEffect(() => {
-    const arr = JSON.parse(localStorage.getItem("notes"));
-    setNotes([...arr]);
-  }, []);
+  const [notes, setNotes] = useState();
+  const sum = useMemo(() => {
+    if (notes && notes.length > 0)
+      return notes.reduce((currentSum, item) => currentSum + item.cost, 0);
+    return 0;
+  }, [notes]);
 
   const contextValue = {
     setNotes,
     notes,
-    setSum,
     sum,
   };
 
