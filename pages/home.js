@@ -1,20 +1,10 @@
 import { useEffect, useContext } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import HomePage from "../components/costs/HomePage";
 import { HomeContext } from "../context/HomeContext";
 import styles from "../styles/Home.module.css";
-
-const GET_ALL_NOTES = gql`
-  query {
-    costs {
-      id
-      score
-      date
-      cost
-    }
-  }
-`;
+import { GET_ALL_NOTES } from "../utils/constants";
 
 export default function Home() {
   const { setNotes } = useContext(HomeContext);

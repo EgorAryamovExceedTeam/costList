@@ -12,15 +12,15 @@ import styles from "../../styles/CostTable.module.css";
 
 const CostTable = () => {
   const { notes } = useContext(HomeContext);
-  if (!notes) {
-    return <div>Loading...</div>;
-  }
   return (
     <div className={styles.container}>
       <TableContainer component={Paper}>
-        <Table className={styles.table_container}>
+        <Table className={styles.table_container} data-testid="table_container">
           <TableHead>
-            <TableRow className={styles.table_head_row}>
+            <TableRow
+              className={styles.table_head_row}
+              data-testid="table_head_row"
+            >
               <TableCell align="center">Позиция</TableCell>
               <TableCell align="center">Магазин</TableCell>
               <TableCell align="center">Дата покупки </TableCell>
@@ -28,17 +28,37 @@ const CostTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {notes.map((item, index) => (
+            {notes?.map((item, index) => (
               <Link href={`/note/${item.id}`} key={`note-${item.id}`}>
                 <TableRow
                   key={`note-${item.id}`}
                   className={styles.table_body_row}
                   data-testid={`note-${index}`}
                 >
-                  <TableCell align="center">{++index}</TableCell>
-                  <TableCell align="center">{item.score}</TableCell>
-                  <TableCell align="center">{item.date}</TableCell>
-                  <TableCell align="center">{item.cost}</TableCell>
+                  <TableCell
+                    align="center"
+                    data-testid={`index_of_note_${index}`}
+                  >
+                    {index + 1}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    data-testid={`item_${index}_score_name_in_table`}
+                  >
+                    {item.score}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    data-testid={`item_${index}_date_in_table`}
+                  >
+                    {item.date}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    data-testid={`item_${index}_cost_value_in_table`}
+                  >
+                    {item.cost}
+                  </TableCell>
                 </TableRow>
               </Link>
             ))}
