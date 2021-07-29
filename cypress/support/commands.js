@@ -27,3 +27,11 @@
 Cypress.Commands.add("getId", (id) => {
   cy.get(`[data-testid=${id}]`);
 });
+
+Cypress.Commands.add("getElemInto", (id, ...children) => {
+  let str = "";
+  children.map((item) => {
+    str += `> ${item} `;
+  });
+  cy.get(`[data-testid=${id}] ${str}`);
+});
